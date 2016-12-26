@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Nidun.iml" filepath="$PROJECT_DIR$/Nidun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idun-common/idun-common.iml" filepath="$PROJECT_DIR$/idun-common/idun-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idun-hbase/idun-hbase.iml" filepath="$PROJECT_DIR$/idun-hbase/idun-hbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idun-web/idun-web.iml" filepath="$PROJECT_DIR$/idun-web/idun-web.iml" />
+    </modules>
+  </component>
+</project>

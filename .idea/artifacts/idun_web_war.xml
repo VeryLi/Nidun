@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="idun-web:war">
+    <output-path>$PROJECT_DIR$/idun-web/target</output-path>
+    <root id="archive" name="idun-web.war">
+      <element id="artifact" artifact-name="idun-web:war exploded" />
+    </root>
+  </artifact>
+</component>
