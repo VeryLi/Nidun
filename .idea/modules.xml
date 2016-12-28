@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Nidun.iml" filepath="$PROJECT_DIR$/Nidun.iml" />
-      <module fileurl="file://$PROJECT_DIR$/idun-bigdata/idun-hbase.iml" filepath="$PROJECT_DIR$/idun-bigdata/idun-hbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idun-bigdata/idun-bigdata.iml" filepath="$PROJECT_DIR$/idun-bigdata/idun-bigdata.iml" />
       <module fileurl="file://$PROJECT_DIR$/idun-common/idun-common.iml" filepath="$PROJECT_DIR$/idun-common/idun-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idun-bigdata/idun-hbase.iml" filepath="$PROJECT_DIR$/idun-bigdata/idun-hbase.iml" />
       <module fileurl="file://$PROJECT_DIR$/idun-stream/idun-stream.iml" filepath="$PROJECT_DIR$/idun-stream/idun-stream.iml" />
       <module fileurl="file://$PROJECT_DIR$/idun-web/idun-web.iml" filepath="$PROJECT_DIR$/idun-web/idun-web.iml" />
     </modules>
