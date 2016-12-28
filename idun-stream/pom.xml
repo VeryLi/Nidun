@@ -9,13 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>idun-hbase</artifactId>
-
+    <artifactId>idun-stream</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.idun</groupId>
             <artifactId>idun-common</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.idun</groupId>
+            <artifactId>idun-bigdata</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka_2.11 -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.11</artifactId>
+            <version>0.10.1.0</version>
         </dependency>
     </dependencies>
 
@@ -52,14 +68,14 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy todir="/home/chen/.m2/repository/com/idun/idun-hbase/1.0-SNAPSHOT">
+                                <copy todir="/home/chen/.m2/repository/com/idun/idun-stream/1.0-SNAPSHOT">
                                     <fileset dir="${project.build.directory}">
-                                       <include name="idun-hbase-1.0-SNAPSHOT.jar" />
+                                        <include name="idun-stream-1.0-SNAPSHOT.jar" />
                                     </fileset>
                                 </copy>
                                 <copy todir="lib">
                                     <fileset dir="${project.build.directory}">
-                                        <include name="idun-hbase-1.0-SNAPSHOT.jar" />
+                                        <include name="idun-stream-1.0-SNAPSHOT.jar" />
                                     </fileset>
                                 </copy>
                             </tasks>
@@ -69,6 +85,19 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.idun.storm.RunMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

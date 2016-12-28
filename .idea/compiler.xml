@@ -22,14 +22,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="idun-bigdata" />
         <module name="idun-common" />
         <module name="idun-hbase" />
+        <module name="idun-storm" />
+        <module name="idun-stream" />
         <module name="idun-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="idun-bigdata" target="1.7" />
       <module name="idun-common" target="1.7" />
       <module name="idun-hbase" target="1.7" />
+      <module name="idun-storm" target="1.7" />
+      <module name="idun-stream" target="1.7" />
       <module name="idun-web" target="1.7" />
       <module name="Nidun" target="1.5" />
     </bytecodeTargetLevel>
