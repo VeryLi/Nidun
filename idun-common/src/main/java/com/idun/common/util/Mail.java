@@ -1,4 +1,4 @@
-package com.idun.common.mail;
+package com.idun.common.util;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import java.io.UnsupportedEncodingException;

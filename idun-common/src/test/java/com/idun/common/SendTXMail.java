@@ -1,7 +1,7 @@
 package com.idun.common;
 
 
-import com.idun.common.mail.Mail;
+import com.idun.common.util.Mail;
 
 public class SendTXMail {
     public static void main(String[] args){
