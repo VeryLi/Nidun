@@ -3,6 +3,8 @@ package com.idun.storm;
 import org.apache.log4j.Logger;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
+import org.apache.storm.kafka.KafkaSpout;
+import org.apache.storm.kafka.bolt.KafkaBolt;
 import org.apache.storm.testing.TestGlobalCount;
 import org.apache.storm.testing.TestWordCounter;
 import org.apache.storm.testing.TestWordSpout;
@@ -27,10 +29,15 @@ public class RunMain {
                 .fieldsGrouping("2", new Fields("word"));
         builder.setBolt("4", new TestGlobalCount())
                 .globalGrouping("1");
+
+//
+//        builder.setSpout("1", SpoutFactory.createKafkaSpout("YeadunTest", "yeadun-test"), 2);
+//        builder.setBolt("2", new TestWordCounter(), 2)
+//                .fieldsGrouping("1", new Fields("word"));
         logger.info("this is a test.");
 
         Map<String, Object> conf = new HashMap<>();
-        conf.put(Config.TOPOLOGY_WORKERS, 4);
+//        conf.put(Config.TOPOLOGY_WORKERS, 4);
         conf.put(Config.TOPOLOGY_DEBUG, true);
 
         LocalCluster cluster = new LocalCluster();

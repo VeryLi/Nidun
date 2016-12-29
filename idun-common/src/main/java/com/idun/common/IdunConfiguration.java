@@ -4,42 +4,34 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.nio.file.Path;
 
-public class IdunConfiguration {
+public class IdunConfiguration extends PropertiesConfiguration{
     private static Logger logger = Logger.getLogger(IdunConfiguration.class);
-    private HashMap<String, Object> defaultProps = new HashMap<>();
-    private HashMap<String, Object> currentProps = new HashMap<>();
-    private PropertiesConfiguration tool;
+    private final static String confPath = "idun-conf.properties";
 
-    public IdunConfiguration(){
-
-    }
-
-    private PropertiesConfiguration createTool(){
+    public static IdunConfiguration createIdunConf(){
         try {
-            return new PropertiesConfiguration("stream-conf.properties");
+            return new IdunConfiguration(confPath);
         } catch (ConfigurationException e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-            return new PropertiesConfiguration();
+            logger.warn("configuration file is not found, so IdunConfiguration is Empty.");
+            return new IdunConfiguration();
         }
     }
 
-    private Object getPropFromFile(String key, Object defaultVal){
-        if(tool.getProperty(key) == null){
-            return defaultVal;
+    public static IdunConfiguration createIdunConf(String path){
+        try {
+            return new IdunConfiguration(path);
+        } catch (ConfigurationException e) {
+            logger.warn(path + " file is not found, so IdunConfiguration is Empty.");
+            return new IdunConfiguration();
         }
-        return tool.getProperty(key);
+    }
+    private IdunConfiguration(){
+        super();
     }
 
-    public Iterator<Map.Entry<String, Object>> iterator() {
-        return currentProps.entrySet().iterator();
-    }
-
-    public Iterator<Map.Entry<String, Object>> iteratorDefault() {
-        return defaultProps.entrySet().iterator();
+    private IdunConfiguration(String path) throws ConfigurationException {
+        super(path);
     }
 }

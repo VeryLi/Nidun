@@ -1,11 +1,11 @@
 package com.idun.common;
 
 
-import com.idun.common.util.Mail;
+import com.idun.common.util.MailUtil;
 
 public class SendTXMail {
     public static void main(String[] args){
-        Mail mail = new Mail("This is a test email.");
-        mail.send("weili.chen@yeadun.com");
+        MailUtil mailUtil = new MailUtil("This is a test email.");
+        mailUtil.send("weili.chen@yeadun.com");
     }
 }

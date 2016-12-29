@@ -20,10 +20,10 @@ import org.apache.commons.crypto.utils.Utils;
 import org.glassfish.grizzly.http.util.Base64Utils;
 
 /**
- * the CryptoUtil class is used for encryption/decryption. The methond enCrypto() and deCrypto
+ * the AECCryptoUtil class is used for encryption/decryption. The methond enCrypto() and deCrypto
  * is thread-unsafe.
  * */
-public class CryptoUtil {
+public class AECCryptoUtil {
 
       // this crypto key, its length must be 16.
       private static final String cryptoKey = "YeaDun123.com.cn";
@@ -36,11 +36,11 @@ public class CryptoUtil {
       private Properties properties;
       private int finalNum;
 
-      public CryptoUtil(){
+      public AECCryptoUtil(){
            this(cryptoKey, ivKey);
       }
 
-      private CryptoUtil(String cryptoKey, String ivKey){
+      private AECCryptoUtil(String cryptoKey, String ivKey){
             key = new SecretKeySpec(getUTF8Bytes(cryptoKey),"AES");
             iv = new IvParameterSpec(getUTF8Bytes(ivKey));
             properties = new Properties();

@@ -10,7 +10,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Mail {
+public class MailUtil {
 
     // Email Server properties.
     private String account  = "service01@yeadun.com";//登录用户名
@@ -26,14 +26,14 @@ public class Mail {
     private String subject;
     private String text;
 
-    public Mail(String emailUser, String subject, String text){
+    public MailUtil(String emailUser, String subject, String text){
         this.emailUser = emailUser;
         this.subject = subject;
         this.text = text;
         init();
     }
 
-    public Mail(String text){
+    public MailUtil(String text){
         this.emailUser = "YeaDun";
         this.subject = "您收到 <羿盾科技> 的通知";
         this.text = text;
