@@ -17,6 +17,7 @@ import org.apache.commons.crypto.cipher.CryptoCipher;
 import org.apache.commons.crypto.cipher.CryptoCipherFactory;
 import org.apache.commons.crypto.cipher.CryptoCipherFactory.CipherProvider;
 import org.apache.commons.crypto.utils.Utils;
+import org.glassfish.grizzly.http.util.Base64Utils;
 
 /**
  * the CryptoUtil class is used for encryption/decryption. The methond enCrypto() and deCrypto
@@ -25,7 +26,7 @@ import org.apache.commons.crypto.utils.Utils;
 public class CryptoUtil {
 
       // this crypto key, its length must be 16.
-      private static final String cryptoKey = "YeaDun123.crypto";
+      private static final String cryptoKey = "YeaDun123.com.cn";
       // this crypto vector key, its length must be 16.
       private static final String ivKey = "1234567890123456";
       private static final String transform = "AES/CBC/PKCS5Padding";
@@ -39,7 +40,7 @@ public class CryptoUtil {
            this(cryptoKey, ivKey);
       }
 
-      public CryptoUtil(String cryptoKey, String ivKey){
+      private CryptoUtil(String cryptoKey, String ivKey){
             key = new SecretKeySpec(getUTF8Bytes(cryptoKey),"AES");
             iv = new IvParameterSpec(getUTF8Bytes(ivKey));
             properties = new Properties();
@@ -52,8 +53,12 @@ public class CryptoUtil {
        * @param input the message which need be encrypted, type is String.
        * @return return the byte[] which has been encrypted.
        **/
-      public byte[] enCrypto(String input){
+      private byte[] enCrypto(String input){
             return enCrypto(getUTF8Bytes(input));
+      }
+
+      public String enCryptoReturnStr(String input){
+            return Base64Utils.encodeToString(enCrypto(input), true);
       }
 
       /**
@@ -62,10 +67,10 @@ public class CryptoUtil {
        * @param input the message which need be encrypted, type is byte[].
        * @return return the byte[] which has been encrypted.
        **/
-      public byte[] enCrypto(byte[] input){
+      private byte[] enCrypto(byte[] input){
             //Creates a CryptoCipher instance with the transformation and properties.
             CryptoCipher encipher ;
-            byte[] encode = new byte[input.length + 20];
+            byte[] encode = new byte[input.length + 16];
             try {
                   encipher = Utils.getCipherInstance(transform, properties);
                   //Initializes the cipher with ENCRYPT_MODE, key and iv.
@@ -88,14 +93,22 @@ public class CryptoUtil {
 
       }
 
+      private byte[] deCrypto(String input, int finalNum) {
+            return deCrypto(Base64Utils.decode(input), finalNum);
+      }
+
+      public String deCryptoReturnStr(String input, int finalNum) {
+            return new String(deCrypto(input, finalNum));
+      }
+
       /**
        * this method is used for decrypting byte array type message.
        *
        * @param input the message which need be decrypted, type is byte[].
        * @return return the byte[] which has been decrypted.
        **/
-      public byte[] deCrypto(byte[] input){
-            byte[] decoded = new byte[input.length + 20];
+      private byte[] deCrypto(byte[] input, int finalNum){
+            byte[] decoded = new byte[input.length + 16];
 
             // Now reverse the process using a different implementation with the same settings
             properties.setProperty(CryptoCipherFactory.CLASSES_KEY, CipherProvider.JCE.getClassName());
@@ -111,8 +124,12 @@ public class CryptoUtil {
             return decoded;
       }
 
+      public int getFinalNum(){
+            return finalNum;
+      }
+
       /**
-       * Converts String to UTF8 bytes
+       * Converts String to UTF8 bytes.
        *
        * @param input the input string
        * @return UTF8 bytes
@@ -120,22 +137,4 @@ public class CryptoUtil {
       private byte[] getUTF8Bytes(String input) {
             return input.getBytes(StandardCharsets.UTF_8);
       }
-
-      /**
-       * Usage Demo.
-       * */
-      public static void main(String[] args) throws Exception {
-            String test = "this is my crypto test.";
-
-            // 1. step create CrytoUtil instance.
-            CryptoUtil crytoUtil = new CryptoUtil();
-            // 2. Encrypto your message and return byte array which has been crypted.
-            byte[] enCode = crytoUtil.enCrypto(test);
-            // 3. Decrypto your message and return byte array which has bee decrypted.
-            byte[] deCode = crytoUtil.deCrypto(enCode);
-
-            System.out.println(new String(deCode));
-      }
-
-
 }
